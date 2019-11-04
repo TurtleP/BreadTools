@@ -1,0 +1,28 @@
+General
+    - Hidden Files
+    - Registry Editor
+    - Restart Explorer
+    - Show Extensions
+
+Command Line
+    - Open Bash
+    - Open Command Prompt
+        - Admin
+    - Open Powershell
+        - Admin
+
+Power
+    - Hibernate
+    - Lock
+    - Log Off
+    - Restart
+        - With Boot Options
+    - Shut Down
+    - Sleep
+    - Switch User
+
+Settings
+    - Open Settings
+    - Open Network & Internet
+    - Open System Information
+    - Open Windows Updates
