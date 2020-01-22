@@ -11,18 +11,21 @@
 
     "Power":
     {
+        "DisplayName": "Power",
         "Icon": "",
         "SubCommands": ""
     },
 
     "Settings":
     {
+        "Display Name": "Settings",
         "Icon": "SystemSettingsBroker.exe",
         "SubCommands": "BreadTools.WindowsSettings;"
     },
 
     "Tools":
     {
+        "Display Name": "Tools",
         "Icon": "",
         "SubCommands": ""
     }
