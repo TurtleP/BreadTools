@@ -1,10 +1,10 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QFont, QPainter, QPainterPath, QPen
+from PyQt5.QtGui import QColor, QFont, QPainter, QPainterPath
 from PyQt5.QtWidgets import QPushButton
 
 
 class Button(QPushButton):
-    def __init__(self, parent, x, y, text):
+    def __init__(self, parent, x, y, text=None):
         super().__init__(parent)
         self.setText(text)
 
@@ -15,7 +15,6 @@ class Button(QPushButton):
         font.setBold(True)
 
         self.setFont(font)
-
 
     def paintEvent(self, event):
         painter = QPainter(self)

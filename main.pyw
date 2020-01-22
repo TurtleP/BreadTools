@@ -21,7 +21,7 @@ if __name__ == "__main__":
         message_box = QMessageBox()
         message_box.setIcon(QMessageBox.Critical)
 
-        icon = QIcon(Storage.resolve_image("icons/icon.ico"))
+        icon = QIcon(Storage.resolve_image("icon.ico"))
         message_box.setWindowIcon(icon)
 
         message_box.setWindowTitle("Bread Tools Failure")

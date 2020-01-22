@@ -1,0 +1,29 @@
+{
+    "Commands":
+    [
+        {
+            "Display Name": "Windows Settings",
+            "Icon": "SystemSettingsBroker.exe",
+            "Name": "BreadTools.WindowsSettings",
+            "SettingsUri": "ms-settings:"
+        }
+    ],
+
+    "Power":
+    {
+        "Icon": "",
+        "SubCommands": ""
+    },
+
+    "Settings":
+    {
+        "Icon": "SystemSettingsBroker.exe",
+        "SubCommands": "BreadTools.WindowsSettings;"
+    },
+
+    "Tools":
+    {
+        "Icon": "",
+        "SubCommands": ""
+    }
+}
