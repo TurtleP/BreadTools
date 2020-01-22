@@ -8,7 +8,7 @@ class Storage:
     DATABASE = None
 
     @staticmethod
-    def load_database():
+    def load_font_database():
         Storage.DATABASE = QFontDatabase()
 
     @staticmethod

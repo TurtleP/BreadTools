@@ -1,6 +1,5 @@
-from PyQt5.QtCore import QEvent, QPoint, QRect, Qt
-from PyQt5.QtGui import (QColor, QCursor, QFont, QMouseEvent, QPainter,
-                         QPainterPath, QPen, QPixmap)
+from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtGui import QColor, QFont, QPainter, QPen
 from PyQt5.QtWidgets import QPushButton
 
 from storage import Storage
@@ -17,7 +16,8 @@ class ImageButton(QPushButton):
         self.default_font.setBold(False)
         self.setText(text)
 
-        self.glyph_font = QFont(Storage.resolve_font("FontAwesome 5 Solid.otf"), 16)
+        font_path = Storage.resolve_font("FontAwesome 5 Solid.otf")
+        self.glyph_font = QFont(font_path, 16)
         self.glyph_font.setBold(False)
         self.glyph = glyph
 
@@ -32,6 +32,7 @@ class ImageButton(QPushButton):
     def on_click(self, is_clicked):
         self.default_font.setBold(is_clicked)
         self.glyph_font.setBold(is_clicked)
+
         self.selected = is_clicked
 
         self.repaint()
@@ -46,10 +47,12 @@ class ImageButton(QPushButton):
         painter.setPen(QPen(QColor(64, 64, 64)))
 
         painter.setFont(self.glyph_font)
-        painter.drawText(self.x() + 16, 0, self.width() + 16, self.height(), Qt.AlignVCenter, self.glyph)
+        painter.drawText(self.x() + 16, 0, self.width() + 16, self.height(),
+                         Qt.AlignVCenter, self.glyph)
 
         painter.setFont(self.default_font)
-        painter.drawText(self.x() + 56, 0, self.width(), self.height(), Qt.AlignVCenter, self.text())
+        painter.drawText(self.x() + 56, 0, self.width(), self.height(),
+                         Qt.AlignVCenter, self.text())
 
         if self.selected:
             painter.setPen(QPen(QColor(0, 120, 212)))
