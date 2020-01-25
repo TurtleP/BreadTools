@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -8,12 +9,25 @@ from PyQt5.Qt import QFontDatabase
 class Storage:
     DATABASE = None
 
-    USER_PREFERENCES_FILE = None
-    USER_PREFERENCES_LOCATION = Path(os.getenv("appdata")) / "Bread_Tools"
+    USER_PREFERENCES = Path(os.getenv("appdata")) / "Bread_Tools"
+    USER_PREFERENCES_FILE = USER_PREFERENCES / "preferences.json"
+
+    PAGE_DATA = None
 
     @staticmethod
     def load():
         Storage.DATABASE = QFontDatabase()
+
+        if not Storage.USER_PREFERENCES.exists():
+            Storage.USER_PREFERENCES.mkdir()
+
+        with open(Storage.resolve_data("elements.json"), "r") as file:
+            Storage.PAGE_DATA = json.loads(file.read())
+
+    @staticmethod
+    def get_page_data(page):
+        if page in Storage.PAGE_DATA:
+            return Storage.PAGE_DATA[page]
 
     @staticmethod
     def __resolve__(directory, relative_path):

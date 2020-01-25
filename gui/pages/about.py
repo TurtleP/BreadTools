@@ -10,7 +10,7 @@ from storage import Storage
 class AboutPage(Page):
 
     def __init__(self, parent):
-        super().__init__(parent, 182, 0)
+        super().__init__(parent)
 
         self.title_font = QFont("Segoe UI", 14)
         self.title_font.setBold(True)

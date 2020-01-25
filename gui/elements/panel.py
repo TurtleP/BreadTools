@@ -3,8 +3,10 @@ from PyQt5.QtGui import QColor, QPainter
 from PyQt5.QtWidgets import QWidget
 
 from gui.elements.imagebutton import ImageButton
-from gui.pages.tools import ToolsPage
 from gui.pages.about import AboutPage
+from gui.pages.power import PowerPage
+from gui.pages.settings import SettingsPage
+from gui.pages.tools import ToolsPage
 from storage import Storage
 
 
@@ -24,8 +26,8 @@ class Panel(QWidget):
         self.sections = [
             ["", "General", ToolsPage(parent)],
             ["", "Command Line"],
-            ["", "Power"],
-            ["", "Settings"],
+            ["", "Power", PowerPage(parent)],
+            ["", "Settings", SettingsPage(parent)],
             [],
             ["", "About", AboutPage(parent)]
         ]
