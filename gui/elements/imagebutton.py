@@ -38,6 +38,7 @@ class ImageButton(QPushButton):
         self.repaint()
 
     def get_clickable(self):
+        # this works because the Panel deals with clicking
         return QRect(self.x(), self.y(), self.width(), self.height())
 
     def paintEvent(self, event):

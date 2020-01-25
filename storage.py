@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -7,8 +8,11 @@ from PyQt5.Qt import QFontDatabase
 class Storage:
     DATABASE = None
 
+    USER_PREFERENCES_FILE = None
+    USER_PREFERENCES_LOCATION = Path(os.getenv("appdata")) / "Bread_Tools"
+
     @staticmethod
-    def load_font_database():
+    def load():
         Storage.DATABASE = QFontDatabase()
 
     @staticmethod
@@ -18,7 +22,8 @@ class Storage:
         if hasattr(sys, '_MEIPASS'):
             ret_path = Path(sys._MEIPASS).joinpath(directory, relative_path)
         else:
-            ret_path = Path(__file__).parent.joinpath(directory).absolute() / relative_path
+            ret_path = Path(__file__).parent.joinpath(
+                directory).absolute() / relative_path
 
         return str(ret_path).replace("\\", "/")
 
@@ -38,12 +43,17 @@ class Storage:
         return QFontDatabase.applicationFontFamilies(id)[0]
 
     @staticmethod
-    def save_file(filepath):
+    def resolve_data(path):
+        return Storage.__resolve__("data", path)
+
+    @staticmethod
+    def save_file(filepath, content):
         pass
 
     @staticmethod
     def read_file(filepath):
-        pass
+        with open(Storage.__resolve__(filepath), "r") as file:
+            return file.read()
 
     @staticmethod
     def version():

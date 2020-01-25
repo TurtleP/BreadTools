@@ -1,0 +1,1 @@
+Licensed under MIT and written in python 3. This program is used as a user-friendly GUI that also performs the same functionality as pbanj's Tools Menu.

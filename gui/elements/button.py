@@ -16,6 +16,12 @@ class Button(QPushButton):
 
         self.setFont(font)
 
+    def enterEvent(self, event):
+        self.setCursor(Qt.PointingHandCursor)
+
+    def leaveEvent(self, event):
+        self.setCursor(Qt.ArrowCursor)
+
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)

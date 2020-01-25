@@ -2,10 +2,17 @@
     "Commands":
     [
         {
+            "Command": ["DelegateExecute", "{556FF0D6-A1EE-49E5-9FA4-90AE116AD744}"],
             "Display Name": "Windows Settings",
             "Icon": "SystemSettingsBroker.exe",
             "Name": "BreadTools.WindowsSettings",
             "SettingsUri": "ms-settings:"
+        },
+        {
+            "Display Name": "Toggle Hidden Files",
+            "Icon": "explorer.exe",
+            "Name": "BreadTools.HiddenFiles",
+            "SettingsUri": ""
         }
     ],
 
