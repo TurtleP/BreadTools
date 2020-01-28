@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QColor, QPainter, QPen, QFont, QBrush
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QLabel
 
 from storage import Storage
 
@@ -11,7 +11,7 @@ class Slider(QPushButton):
 
         self.move(x, y)
 
-        self.setMinimumWidth(72)
+        self.setMinimumWidth(52)
         self.setMinimumHeight(24)
 
         self.setText(text)
@@ -34,27 +34,16 @@ class Slider(QPushButton):
 
         self.pen = QPen(QColor(194, 194, 194))
         self.pen.setWidth(2)
+
         self.setCheckable(True)
 
     def mousePressEvent(self, event):
         self.setChecked(not self.isChecked())
 
-        background_color = self.background_off
-        pen_color = QColor(194, 194, 194)
-
-        if self.isChecked():
-            background_color = self.background_on
-            pen_color = background_color
-
-        self.background = background_color
-        self.pen.setColor(pen_color)
-
-        self.repaint()
-
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.HighQualityAntialiasing)
-
+        # painter.drawRect(self.rect())
         painter.translate(self.rect().center())
 
         painter.setBrush(QBrush(self.background))
@@ -65,8 +54,12 @@ class Slider(QPushButton):
         painter.drawRoundedRect(self.dot_rect, 10, 10)
 
         if self.isChecked():
+            self.background = self.background_on
+            self.pen.setColor(self.background)
             self.dot_rect.moveRight(self.click_width)
         else:
+            self.background = self.background_off
+            self.pen.setColor(QColor(194, 194, 194))
             self.dot_rect.moveLeft(-self.click_width)
 
         painter.end()

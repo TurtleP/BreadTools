@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget
 
 from gui.elements.imagebutton import ImageButton
 from gui.pages.about import AboutPage
+from gui.pages.command import CommandPage
 from gui.pages.power import PowerPage
 from gui.pages.settings import SettingsPage
 from gui.pages.tools import ToolsPage
@@ -25,7 +26,7 @@ class Panel(QWidget):
 
         self.sections = [
             ["", "General", ToolsPage(parent)],
-            ["", "Command Line"],
+            ["", "Command Line", CommandPage(parent)],
             ["", "Power", PowerPage(parent)],
             ["", "Settings", SettingsPage(parent)],
             [],

@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -9,25 +10,42 @@ from PyQt5.Qt import QFontDatabase
 class Storage:
     DATABASE = None
 
-    USER_PREFERENCES = Path(os.getenv("appdata")) / "Bread_Tools"
-    USER_PREFERENCES_FILE = USER_PREFERENCES / "preferences.json"
+    USER_PREFERENCES_DIR = Path(os.getenv("appdata")) / "Bread_Tools"
+    USER_PREFERENCES_FILE = USER_PREFERENCES_DIR / "userdata.json"
 
     PAGE_DATA = None
+    REGEDIT_DATA = None
+    USER_PREFERENCES = None
 
     @staticmethod
     def load():
         Storage.DATABASE = QFontDatabase()
 
-        if not Storage.USER_PREFERENCES.exists():
-            Storage.USER_PREFERENCES.mkdir()
+        if not Storage.USER_PREFERENCES_DIR.exists():
+            Storage.USER_PREFERENCES_DIR.mkdir()
 
         with open(Storage.resolve_data("elements.json"), "r") as file:
             Storage.PAGE_DATA = json.loads(file.read())
+
+        with open(Storage.resolve_data("regedit.json"), "r") as file:
+            Storage.REGEDIT_DATA = json.loads(file.read())
+
+        if not Storage.USER_PREFERENCES_FILE.exists():
+            shutil.copy(Storage.resolve_data("userdata.json"),
+                        Storage.USER_PREFERENCES)
+
+        with open(Storage.USER_PREFERENCES_FILE, "r") as file:
+            Storage.USER_PREFERENCES = json.loads(file.read())
 
     @staticmethod
     def get_page_data(page):
         if page in Storage.PAGE_DATA:
             return Storage.PAGE_DATA[page]
+
+    @staticmethod
+    def get_user_data(page):
+        if page in Storage.USER_PREFERENCES:
+            return Storage.USER_PREFERENCES[page]
 
     @staticmethod
     def __resolve__(directory, relative_path):

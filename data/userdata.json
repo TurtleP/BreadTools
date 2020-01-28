@@ -1,0 +1,36 @@
+{
+    "general":
+    {
+        "BreadTools.HiddenFiles": false,
+        "BreadTools.RegistryEditor": false,
+        "BreadTools.RestartExplorer": false,
+        "BreadTools.ShowFileExtensions": false
+    },
+
+    "command_line":
+    {
+        "BreadTools.OpenBashHere": false,
+        "BreadTools.OpenCommandPromptHere": false,
+        "BreadTools.OpenCommandPromptAdminHere": false,
+        "BreadTools.OpenPowerShellHere": false,
+        "BreadTools.OpenPowerShellAdminHere": false
+    },
+
+    "power":
+    {
+        "BreadTools.HibernatePC": false,
+        "BreadTools.LockPC": false,
+        "BreadTools.RestartPC": false,
+        "BreadTools.ShutdownPC": false,
+        "BreadTools.SleepPC": false,
+        "BreadTools.SwitchUser": false
+    },
+
+    "settings":
+    {
+        "BreadTools.WindowsSettings": false,
+        "BreadTools.NetworkInternet": false,
+        "BreadTools.AboutThisPC": false,
+        "BreadTools.WindowsUpdate": false
+    }
+}

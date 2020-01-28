@@ -21,7 +21,7 @@ class AboutPage(Page):
         self.label.setFont(self.body_font)
         self.label.move(16, self.height() * 0.15)
         self.label.setFixedSize(self.width() * 0.90, self.height() * 0.70)
-        self.label.setAlignment(Qt.AlignJustify)
+        self.label.setAlignment(Qt.AlignLeft)
         self.label.setWordWrap(True)
 
         self.button = Button(self, (self.width() - 128) * 0.5,
