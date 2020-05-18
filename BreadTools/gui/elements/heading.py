@@ -27,7 +27,7 @@ class Header(QWidget):
         if has_button:
             self.button = RoundButton(self)
             self.button.move((self.width() - self.button.width()) - 12,
-                        (self.height() - self.button.height()) / 2)
+                             (self.height() - self.button.height()) / 2)
             self.button.setText("Save")
             self.button.setEnabled(False)
 
