@@ -14,7 +14,7 @@ class SideBar(QWidget):
             ["", "General Tools", Page(parent, "General")],
             ["", "Command Line",  Page(parent, "Command")],
             ["", "Power",         Page(parent, "Power")],
-            ["", "Settings",      Page(parent, "Settings")],
+            ["", "Windows Settings",      Page(parent, "WinSettings")],
             [],
             ["", "About", Page(parent, "About")]
         ]

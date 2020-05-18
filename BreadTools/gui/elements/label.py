@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QLabel, QFrame
 from PyQt5.QtGui import QFont
 
 

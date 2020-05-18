@@ -1,10 +1,9 @@
-from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QColor, QIcon
-
-from .elements.roundbutton import RoundButton
-from .panel import SideBar
+from PyQt5.QtWidgets import QMainWindow
 
 from ..storage import Storage
+from .panel import SideBar
+
 
 class Window(QMainWindow):
 
@@ -25,11 +24,5 @@ class Window(QMainWindow):
         self.setPalette(palette)
 
         SideBar(self)
-
-        button = RoundButton(self)
-        button.move((self.width() - button.width()) - 12,
-                    (self.height() - button.height()) - 12)
-        button.setText("Save")
-        button.setEnabled(False)
 
         self.show()

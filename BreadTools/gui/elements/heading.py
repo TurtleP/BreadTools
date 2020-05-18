@@ -1,11 +1,13 @@
-from PyQt5.QtWidgets import QWidget
-from PyQt5.QtGui import QFont, QPainter, QColor
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QFont, QPainter
+from PyQt5.QtWidgets import QWidget
+
+from .roundbutton import RoundButton
 
 
 class Header(QWidget):
 
-    def __init__(self, parent, text=None):
+    def __init__(self, parent, text=None, has_button=True):
         super().__init__(parent)
 
         font = QFont("Segoe UI", 20)
@@ -21,6 +23,13 @@ class Header(QWidget):
         palette = self.palette()
         palette.setColor(self.backgroundRole(), QColor("#eeeeee"))
         self.setPalette(palette)
+
+        if has_button:
+            self.button = RoundButton(self)
+            self.button.move((self.width() - self.button.width()) - 12,
+                        (self.height() - self.button.height()) / 2)
+            self.button.setText("Save")
+            self.button.setEnabled(False)
 
         self.hide()
 

@@ -1,12 +1,13 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QFrame, QScrollArea, QSizePolicy,
-                             QVBoxLayout, QWidget)
-
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import (QFrame, QScrollArea, QSizePolicy, QVBoxLayout,
+                             QWidget)
 
 from ..storage import Storage
-from .elements.label import Label
 from .elements.heading import Header
+from .elements.label import Label
+from .elements.slider import Slider
+from .elements.radiogroup import RadioGroup
 
 
 class Page(QWidget):
@@ -17,11 +18,8 @@ class Page(QWidget):
         self.move(192, 51)
         self.name = name
 
-        self.header = Header(parent, name)
-        self.header.move(192, 0)
-
         self.setFixedSize(parent.width() - 192,
-                          parent.height() - self.height())
+                          parent.height() - 51)
 
         self.setAutoFillBackground(True)
 
@@ -29,27 +27,10 @@ class Page(QWidget):
         palette.setColor(self.backgroundRole(), QColor("#eeeeee"))
         self.setPalette(palette)
 
-        # Create layout and scroll region
-        self.m_layout = QVBoxLayout()
-        self.scroll_area = QScrollArea(self)
-
-        # Content panel/widget with the Vertical layout
-        self.content = QWidget(self.scroll_area)
-        self.content.setLayout(self.m_layout)
-
-        # Set up our Scroll Area with the content panel
-        # and other config stuff
-        self.scroll_area.setWidget(self.content)
-        self.scroll_area.setFixedSize(self.width(), self.height())
-        self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scroll_area.setFrameStyle(QFrame.NoFrame)
-
         self.elements = []
         self.load_elements(name)
 
-        if len(self.elements) > 5:
-            self.m_layout.setSpacing(16)
+        # self.m_layout.setSpacing(16)
 
         self.hide()
 
@@ -67,17 +48,52 @@ class Page(QWidget):
     def load_elements(self, name):
         page_data = Storage.get_page_data(name)
 
-        for index, element in enumerate(page_data["elements"]):
+        self.header = Header(self.parent(), name, page_data != None)
+        self.header.move(192, 0)
+
+        if not page_data:
+            return
+
+        # Create layout and scroll region
+        layout = QVBoxLayout()
+        scroll_area = QScrollArea(self)
+
+        # Content panel/widget with the Vertical layout
+        content = QWidget(scroll_area)
+        content.setLayout(layout)
+
+        # self.m_layout.setSpacing(16)
+        # self.m_layout.setContentsMargins(0, 20, 0, 0)
+
+        # Set up our Scroll Area with the content panel
+        # and other config stuff
+        scroll_area.setWidget(content)
+        scroll_area.setFixedWidth(self.width())
+        scroll_area.setFixedHeight(self.height())
+
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll_area.setFrameStyle(QFrame.NoFrame)
+
+        if len(page_data["elements"]) > 5:
+            layout.setSpacing(16)
+
+        for row in page_data["elements"]:
             panel = QWidget()
 
             panel.setFixedWidth(self.width() - 32)
-            panel.setMinimumHeight(64)
+            panel.setMinimumHeight(120)
 
-            if element[0] == "label":
-                Label(panel, element[1], True).move(16, 0)
+            for index, element in enumerate(row):
+                if element[0] == "label":
+                    is_bold = len(element) > 2 and int(element[2]) or False
+                    Label(panel, element[1], is_bold).move(16, index * 24)
+                elif element[0] == "slider":
+                    Slider(panel).move(16, index * 26)
+                elif element[0] == "menu":
+                    RadioGroup(panel, 16, index * 24, 2, element[1:])
 
             panel.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
-            panel.show()
 
-            self.m_layout.addWidget(panel)
+            layout.addWidget(panel)
             self.elements.append(panel)

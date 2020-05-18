@@ -31,7 +31,6 @@ class ImageButton(QPushButton):
 
     def mousePressEvent(self, event):
         self.default_font.setBold(True)
-        self.glyph_font.setBold(True)
 
         super().setChecked(True)
 
@@ -39,6 +38,7 @@ class ImageButton(QPushButton):
             if self.parent().lastItem:
                 self.parent().lastItem.unSelect()
 
+            Storage.get_sound("tap").play()
             self.parent().lastItem = self
             self.page.show()
 
@@ -46,7 +46,6 @@ class ImageButton(QPushButton):
 
     def unSelect(self):
         self.default_font.setBold(False)
-        self.glyph_font.setBold(False)
 
         super().setChecked(False)
         self.page.hide()

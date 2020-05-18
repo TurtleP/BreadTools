@@ -4,7 +4,7 @@ from pathlib import Path
 
 import msgpack
 import toml
-from PyQt5.Qt import QFontDatabase
+from PyQt5.Qt import QFontDatabase, QSound
 
 
 class Storage:
@@ -16,6 +16,8 @@ class Storage:
     USER_DATA_FILE = USER_PREFERENCES_DIR / "preferences"
     PAGE_DATA = None
 
+    SOUNDS = None
+
     @staticmethod
     def load():
         Storage.DATABASE = QFontDatabase()
@@ -24,6 +26,11 @@ class Storage:
             Storage.USER_PREFERENCES_DIR.mkdir()
 
         Storage.load_page_data()
+
+        Storage.SOUNDS = {
+            "tap": QSound(Storage.resolve_audio("navigation_forward-selection-minimal.wav"))
+        }
+
 
     @staticmethod
     def __resolve__(directory, relative_path):
@@ -44,7 +51,14 @@ class Storage:
 
     @staticmethod
     def get_page_data(name):
-        return Storage.PAGE_DATA[name]
+        if name in Storage.PAGE_DATA:
+            return Storage.PAGE_DATA[name]
+
+        return None
+
+    @staticmethod
+    def get_sound(name):
+        return Storage.SOUNDS[name]
 
     @staticmethod
     def resolve_image(path):
@@ -52,7 +66,7 @@ class Storage:
 
     @staticmethod
     def resolve_audio(path):
-        return Storage.__resolve__("audio", path)
+        return Storage.__resolve__("data/audio", path)
 
     @staticmethod
     def resolve_font(path):
