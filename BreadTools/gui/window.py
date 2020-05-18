@@ -21,7 +21,7 @@ class Window(QMainWindow):
         self.setAutoFillBackground(True)
 
         palette = self.palette()
-        palette.setColor(self.backgroundRole(), QColor("#eeeeee"))
+        palette.setColor(self.backgroundRole(), QColor("#e0e0e0"))
         self.setPalette(palette)
 
         SideBar(self)

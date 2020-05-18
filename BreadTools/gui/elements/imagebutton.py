@@ -6,7 +6,7 @@ from ...storage import Storage
 
 
 class ImageButton(QPushButton):
-    def __init__(self, parent, x, y):
+    def __init__(self, parent, x, y, page):
         super().__init__(parent)
 
         self.move(x, y)
@@ -19,6 +19,8 @@ class ImageButton(QPushButton):
 
         self.default_font = QFont("Segoe UI", 11)
         self.default_font.setBold(False)
+
+        self.page = page
 
         resolved_font = Storage.resolve_font("FontAwesome 5 Solid.otf")
         self.glyph_font = QFont(resolved_font, 11)
@@ -36,7 +38,9 @@ class ImageButton(QPushButton):
         if self.parent().lastItem != self:
             if self.parent().lastItem:
                 self.parent().lastItem.unSelect()
+
             self.parent().lastItem = self
+            self.page.show()
 
         self.repaint()
 
@@ -45,6 +49,7 @@ class ImageButton(QPushButton):
         self.glyph_font.setBold(False)
 
         super().setChecked(False)
+        self.page.hide()
 
         self.repaint()
 

@@ -1,0 +1,16 @@
+[General]
+elements=[
+    ["label", "Toggle Hidden Files & Folders"]
+]
+
+[Command]
+elements=[]
+
+[Power]
+elements=[]
+
+[Settings]
+elements=[]
+
+[About]
+elements=[]

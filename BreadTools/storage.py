@@ -1,15 +1,20 @@
-import json
 import os
 import sys
 from pathlib import Path
 
+import msgpack
+import toml
 from PyQt5.Qt import QFontDatabase
 
 
 class Storage:
     DATABASE = None
 
-    USER_PREFERENCES_DIR = Path(os.getenv("appdata")) / "Bread_Tools"
+    APPDATA_DIR = Path(os.getenv("appdata"))
+    USER_PREFERENCES_DIR = APPDATA_DIR / "Bread_Tools"
+
+    USER_DATA_FILE = USER_PREFERENCES_DIR / "preferences"
+    PAGE_DATA = None
 
     @staticmethod
     def load():
@@ -17,6 +22,8 @@ class Storage:
 
         if not Storage.USER_PREFERENCES_DIR.exists():
             Storage.USER_PREFERENCES_DIR.mkdir()
+
+        Storage.load_page_data()
 
     @staticmethod
     def __resolve__(directory, relative_path):
@@ -29,6 +36,15 @@ class Storage:
                 directory).absolute() / relative_path
 
         return str(ret_path).replace("\\", "/")
+
+    @staticmethod
+    def load_page_data():
+        with open(Storage.resolve_data("pages.toml"), "r") as file:
+            Storage.PAGE_DATA = toml.load(file)
+
+    @staticmethod
+    def get_page_data(name):
+        return Storage.PAGE_DATA[name]
 
     @staticmethod
     def resolve_image(path):

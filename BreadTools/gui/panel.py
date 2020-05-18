@@ -1,7 +1,8 @@
-from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QWidget
 
 from .elements.imagebutton import ImageButton
+from .page import Page
 
 
 class SideBar(QWidget):
@@ -10,13 +11,15 @@ class SideBar(QWidget):
         super().__init__(parent)
 
         self.items = [
-            ["", "General Tools"],
-            ["", "Command Line"],
-            ["", "Power"],
-            ["", "Settings"],
+            ["", "General Tools", Page(parent, "General")],
+            ["", "Command Line",  Page(parent, "Command")],
+            ["", "Power",         Page(parent, "Power")],
+            ["", "Settings",      Page(parent, "Settings")],
             [],
-            ["", "About"]
+            ["", "About", Page(parent, "About")]
         ]
+
+        self.buttons = []
 
         self.setFixedSize(192, parent.height())
         self.setAutoFillBackground(True)
@@ -29,8 +32,11 @@ class SideBar(QWidget):
             if not self.items[index]:
                 continue
 
-            button = ImageButton(self, 0, index * 44)
-            button.setText(*self.items[index])
+            self.items[index][2].setText(self.items[index][1])
+            button = ImageButton(self, 0, index * 44, self.items[index][2])
+            button.setText(self.items[index][0], self.items[index][1])
+
+            self.buttons.append(button)
 
         self.lastItem = None
 

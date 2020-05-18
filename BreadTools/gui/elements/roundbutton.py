@@ -18,7 +18,6 @@ class RoundButton(QPushButton):
     def setEnabled(self, flag):
         super().setEnabled(flag)
         self.repaint()
-        print(self.isEnabled())
 
     def paintEvent(self, event):
         painter = QPainter(self)
