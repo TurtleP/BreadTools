@@ -29,6 +29,9 @@ class Slider(QPushButton):
         self.setCheckable(True)
         self.setChecked(value)
 
+    def refresh(self):
+        pass
+
     def mousePressEvent(self, event):
         self.setChecked(not self.isChecked())
 
@@ -50,7 +53,7 @@ class Slider(QPushButton):
             self.pen.setColor(QColor(194, 194, 194))
             self.dot_rect.moveLeft(-self.click_width)
 
-        self.repaint()
+        self.update()
 
     def paintEvent(self, event):
         painter = QPainter(self)

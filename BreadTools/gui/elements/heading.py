@@ -1,8 +1,10 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QFont, QPainter
+from PyQt5.QtGui import QColor, QFont, QPainter, QPen
 from PyQt5.QtWidgets import QWidget
 
 from .roundbutton import RoundButton
+
+from ..colors import get_color
 
 
 class Header(QWidget):
@@ -21,7 +23,7 @@ class Header(QWidget):
         self.setAutoFillBackground(True)
 
         palette = self.palette()
-        palette.setColor(self.backgroundRole(), QColor("#eeeeee"))
+        palette.setColor(self.backgroundRole(), QColor(get_color("main")))
         self.setPalette(palette)
 
         if has_button:
@@ -33,6 +35,11 @@ class Header(QWidget):
 
         self.hide()
 
+    def refresh(self):
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), QColor(get_color("main")))
+        self.setPalette(palette)
+
     def setText(self, text):
         self.text = text
 
@@ -41,6 +48,8 @@ class Header(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)
 
         painter.setFont(self.font())
+        painter.setPen(QPen(QColor(get_color("text"))))
+
         painter.drawText(18, self.y(),
                          self.width(), self.height(),
                          Qt.AlignVCenter, self.text)

@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QMainWindow
 from ..storage import Storage
 from .panel import SideBar
 
+from .colors import get_color
+
 
 class Window(QMainWindow):
 
@@ -19,10 +21,13 @@ class Window(QMainWindow):
 
         self.setAutoFillBackground(True)
 
-        palette = self.palette()
-        palette.setColor(self.backgroundRole(), QColor("#e0e0e0"))
-        self.setPalette(palette)
+        self.refresh()
 
         SideBar(self)
 
         self.show()
+
+    def refresh(self):
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), QColor(get_color("main")))
+        self.setPalette(palette)

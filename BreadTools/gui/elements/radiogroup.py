@@ -1,5 +1,7 @@
-from PyQt5.QtWidgets import QRadioButton, QWidget, QSizePolicy
+from PyQt5.QtWidgets import QRadioButton, QWidget
 from PyQt5.QtGui import QFont
+
+from ..colors import get_color
 
 
 class RadioGroup(QWidget):
@@ -17,3 +19,11 @@ class RadioGroup(QWidget):
             radio_button.setFont(QFont("Segoe UI", 10))
 
             self.radios.append(radio_button)
+
+        self.refresh()
+
+    def refresh(self):
+        print("refresh")
+        for item in self.radios:
+            color = get_color("text")
+            item.setStyleSheet("color: " + color + ";")

@@ -1,0 +1,11 @@
+[light]
+main="eeeeee"
+side="e0e0e0"
+text="000000"
+high="cfcfcf"
+
+[dark]
+main="000000"
+side="212121"
+text="eeeeee"
+high="373737"

@@ -13,10 +13,13 @@ class Storage:
     APPDATA_DIR = Path(os.getenv("appdata"))
     USER_PREFERENCES_DIR = APPDATA_DIR / "Bread_Tools"
 
-    USER_DATA_FILE = USER_PREFERENCES_DIR / "preferences"
-    PAGE_DATA = None
+    USER_DATA_FILE = USER_PREFERENCES_DIR / "save"
+    USER_DATA = None
 
+    PAGE_DATA = None
     SOUNDS = None
+
+    COLORS = None
 
     @staticmethod
     def load():
@@ -31,6 +34,9 @@ class Storage:
             "tap": QSound(Storage.resolve_audio("navigation_forward-selection-minimal.wav"))
         }
 
+        if Storage.USER_DATA_FILE.exists():
+            with open(Storage.USER_DATA_FILE, "r") as file:
+                Storage.USER_DATA = msgpack.load(file)
 
     @staticmethod
     def __resolve__(directory, relative_path):
