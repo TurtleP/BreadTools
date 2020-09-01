@@ -1,21 +1,25 @@
-import json
 import os
-import shutil
 import sys
 from pathlib import Path
 
-from PyQt5.Qt import QFontDatabase
+import msgpack
+import toml
+from PyQt5.Qt import QFontDatabase, QSound
 
 
 class Storage:
     DATABASE = None
 
-    USER_PREFERENCES_DIR = Path(os.getenv("appdata")) / "Bread_Tools"
-    USER_PREFERENCES_FILE = USER_PREFERENCES_DIR / "userdata.json"
+    APPDATA_DIR = Path(os.getenv("appdata"))
+    USER_PREFERENCES_DIR = APPDATA_DIR / "Bread_Tools"
+
+    USER_DATA_FILE = USER_PREFERENCES_DIR / "save"
+    USER_DATA = None
 
     PAGE_DATA = None
-    REGEDIT_DATA = None
-    USER_PREFERENCES = None
+    SOUNDS = None
+
+    COLORS = None
 
     @staticmethod
     def load():
@@ -24,28 +28,15 @@ class Storage:
         if not Storage.USER_PREFERENCES_DIR.exists():
             Storage.USER_PREFERENCES_DIR.mkdir()
 
-        with open(Storage.resolve_data("elements.json"), "r") as file:
-            Storage.PAGE_DATA = json.loads(file.read())
+        Storage.load_page_data()
 
-        with open(Storage.resolve_data("regedit.json"), "r") as file:
-            Storage.REGEDIT_DATA = json.loads(file.read())
+        Storage.SOUNDS = {
+            "tap": QSound(Storage.resolve_audio("navigation_forward-selection-minimal.wav"))
+        }
 
-        if not Storage.USER_PREFERENCES_FILE.exists():
-            shutil.copy(Storage.resolve_data("userdata.json"),
-                        Storage.USER_PREFERENCES)
-
-        with open(Storage.USER_PREFERENCES_FILE, "r") as file:
-            Storage.USER_PREFERENCES = json.loads(file.read())
-
-    @staticmethod
-    def get_page_data(page):
-        if page in Storage.PAGE_DATA:
-            return Storage.PAGE_DATA[page]
-
-    @staticmethod
-    def get_user_data(page):
-        if page in Storage.USER_PREFERENCES:
-            return Storage.USER_PREFERENCES[page]
+        if Storage.USER_DATA_FILE.exists():
+            with open(Storage.USER_DATA_FILE, "r") as file:
+                Storage.USER_DATA = msgpack.load(file)
 
     @staticmethod
     def __resolve__(directory, relative_path):
@@ -60,16 +51,32 @@ class Storage:
         return str(ret_path).replace("\\", "/")
 
     @staticmethod
+    def load_page_data():
+        with open(Storage.resolve_data("pages.toml"), "r") as file:
+            Storage.PAGE_DATA = toml.load(file)
+
+    @staticmethod
+    def get_page_data(name):
+        if name in Storage.PAGE_DATA:
+            return Storage.PAGE_DATA[name]
+
+        return None
+
+    @staticmethod
+    def get_sound(name):
+        return Storage.SOUNDS[name]
+
+    @staticmethod
     def resolve_image(path):
         return Storage.__resolve__("graphics", path)
 
     @staticmethod
     def resolve_audio(path):
-        return Storage.__resolve__("audio", path)
+        return Storage.__resolve__("data/audio", path)
 
     @staticmethod
     def resolve_font(path):
-        new_path = Storage.__resolve__("graphics/fonts", path)
+        new_path = Storage.__resolve__("data/fonts", path)
 
         id = Storage.DATABASE.addApplicationFont(new_path)
         return QFontDatabase.applicationFontFamilies(id)[0]
