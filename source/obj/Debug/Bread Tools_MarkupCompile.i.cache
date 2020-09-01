@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\jpost\GitHub\Bread Tools\obj\Debug\
+C:\Users\jpost\GitHub\BreadTools\source\obj\Debug\
 Bread_Tools
 none
 false
 DEBUG;TRACE
-C:\Users\jpost\GitHub\Bread Tools\App.xaml
-5-358652852
+C:\Users\jpost\GitHub\BreadTools\source\App.xaml
+5-577289694
 
-101056926161
-16-327076916
-MainWindow.xaml;Resources\Pages\CommandPage.xaml;Resources\Pages\GeneralPage.xaml;Resources\Pages\PCSettingsPage.xaml;Resources\Pages\PowerPage.xaml;
+10-1061911629
+161686558557
+Resources\MainWindow.xaml;Resources\Pages\CommandPage.xaml;Resources\Pages\GeneralPage.xaml;Resources\Pages\PCSettingsPage.xaml;Resources\Pages\PowerPage.xaml;
 
-False
+True
 
