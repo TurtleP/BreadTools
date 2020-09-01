@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Bread_Tools.Resources.Pages;
+using System;
+using System.Linq;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Linq;
-using Bread_Tools.Resources.Pages;
 
 namespace Bread_Tools
 {
@@ -72,8 +72,14 @@ namespace Bread_Tools
             Label label = panel.Children.OfType<Label>().First();
             label.FontWeight = FontWeights.Normal;
 
-            Rectangle rect = panel.Children.OfType<Rectangle>().First();
-            rect.Fill = Brushes.Transparent;
+            try
+            {
+                Rectangle rect = panel.Children.OfType<Rectangle>().First();
+
+                rect.Fill = Brushes.Transparent;
+            }
+            catch (Exception)
+            { }
         }
 
         private void SelectPanelItem(object sender, EventArgs e)
@@ -93,7 +99,7 @@ namespace Bread_Tools
             Rectangle rect = panel.Children.OfType<Rectangle>().First();
 
             rect.Fill = Brushes.DeepSkyBlue;
-            
+
         }
 
         private void ShowGeneralPage(object sender, MouseButtonEventArgs e)

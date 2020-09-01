@@ -1,7 +1,7 @@
 ﻿Bread Tools
 
 
-winexe
+exe
 C#
 .cs
 C:\Users\jpost\GitHub\BreadTools\source\obj\Debug\
@@ -13,7 +13,7 @@ C:\Users\jpost\GitHub\BreadTools\source\App.xaml
 5-577289694
 
 10-1061911629
-161686558557
+17897030639
 Resources\MainWindow.xaml;Resources\Pages\CommandPage.xaml;Resources\Pages\GeneralPage.xaml;Resources\Pages\PCSettingsPage.xaml;Resources\Pages\PowerPage.xaml;
 
 True

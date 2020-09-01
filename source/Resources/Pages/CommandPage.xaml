@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
-                    <Label x:Name="label" HorizontalContentAlignment="Left" Content="Open Bash Here" FontSize="18pt" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Margin="12,0,0,0" Padding="0"/>
+                    <Label x:Name="label" HorizontalContentAlignment="Left" Content="Open Bash Here" FontSize="16pt" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Margin="12,0,0,0" Padding="0"/>
                     <TextBlock FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,3,0,0" TextWrapping="Wrap"><Run Text="Opens a Windows Subsystem for Linux window in the "/><LineBreak/><Run Text="current directory."/></TextBlock>
                     <ToggleSwitch:ToggleSwitch Width="44" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,8,0,8" Padding="0,0,2,0"/>
                 </StackPanel>
